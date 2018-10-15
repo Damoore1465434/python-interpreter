@@ -8,56 +8,17 @@ displays what should be properly displayed in
 the console
 */
 
-#include <iostream>
-#include <fstream>
-#include <vector>
-#include <string>
-#include <algorithm>
+#include "pyInter.h"
 
 using namespace std;
 
 int main(int argc, char* argv[]) {
-
-	//variable containers
+	pyInter obj;
 	string line;
 	ifstream in_file;
-	vector<char> char_remove = { '"', '(', ')' };
-
-	//open file to read lines as instructions
-	in_file.open("pyCode.txt");
-
-	//loop through lines and perform different functions
-	while (getline(in_file, line)) {
-
-		//catches comments and skips line
-		if (line.find("#") != string::npos)
-			continue;
-
-		//if its a print line then we send to print function
-		else if (line.find("print") != string::npos) {
-
-			//iterate through container for characters to remove for print function
-			for (int i = 0; i != char_remove.size(); i++)
-				line.erase(remove(line.begin(), line.end(), char_remove[i]), line.end());
-			line.erase(line.begin(), line.begin() + 5);
-
-			cout << line << endl;
-		}
-		else if (line.find(':')) // to incorporate the colon operator
-		{
-			//if its a def use a function to read the function
-
-			//if its a variable then store in variable container
-
-			//if its an operator then store in operator container
-			
-			//return value finder
-			if (line.find("return")) {
-				//t = x + y;
-				continue;
-			}
-		}
-	}
+//open file to read lines as instructions
+in_file.open("pyCode.txt");
+obj.getLine(in_file,line);
 system("pause");
 
 //close file once done
